@@ -1,0 +1,58 @@
+<div class="div-card" *ngIf="userSetting">
+  <mat-card fxLayout fyLayoutGap="20px">
+    <span fxFlex="2 2 100%">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>gas_meter</mat-icon>
+          <ng-container [ngSwitch]="userSetting.selected_language">
+            <ng-container *ngSwitchCase="'english'">Gas dictating results of the last three months:</ng-container>
+            <ng-container *ngSwitchCase="'magyar'">Dikátálisi eredmények három hónapra visszamenőleg:</ng-container>
+          </ng-container>
+        </mat-card-title>
+      </mat-card-header>
+      <span>
+        <mat-card-content
+          *ngFor="let objectOfAddress of userAddresses_Dictations; let i=index;">
+          <mat-accordion>
+            <mat-expansion-panel [ngStyle]="{'background-color' : i % 2 === 0 ? '#e8f1ff' : '#d1e3ff'}">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <mat-icon>house</mat-icon>
+                  {{objectOfAddress.address.address.city}},
+                  {{objectOfAddress.address.address.street}},
+                  {{objectOfAddress.address.address.housenumber}}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <span *ngFor="let objectOfDictation of objectOfAddress.dictation">
+                <mat-card-content>
+                  <mat-accordion>
+                    <mat-expansion-panel>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          <mat-icon>payments</mat-icon>
+                          {{objectOfDictation.dictation_date | pipeDictatingFormat}}
+                        </mat-panel-title>
+                        {{objectOfDictation.usedUpGas}}.00 Ft
+                      </mat-expansion-panel-header>
+                      <ng-container [ngSwitch]="userSetting.selected_language">
+                        <ng-container *ngSwitchCase="'english'">Dictation time: {{objectOfDictation.dictation_date | dateFormat}}</ng-container>
+                        <ng-container *ngSwitchCase="'magyar'">Diktálás időpontja: {{objectOfDictation.dictation_date | dateFormat}}</ng-container>
+                      </ng-container>
+                      <br/>
+                      <ng-container [ngSwitch]="userSetting.selected_language">
+                        <ng-container *ngSwitchCase="'english'">Used Up Gase: {{objectOfDictation.usedUpGas / priceOfGas}}m³</ng-container>
+                        <ng-container *ngSwitchCase="'magyar'">Felhasznált gáz: {{objectOfDictation.usedUpGas / priceOfGas}}m³</ng-container>
+                      </ng-container>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </mat-card-content>
+              </span>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-card-content>
+      </span>
+    </span>
+  </mat-card>
+</div>
+
+

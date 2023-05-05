@@ -1,0 +1,78 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <app-menu (selectedPage)="changePage($event)"
+      [currentPage]="page" *ngIf="page"
+      (onCloseSidenav)="onClose($event, sidenav)"
+      [loggedInUser]="loggedInUser"
+      (onLogout)="logout($event)"></app-menu>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <div fxHide.gt-xs>
+        <button mat-icon-button (click)="onToggleSidenav(sidenav)">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+      <div>APP</div>
+      <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+        <ul fxLayout fxLayoutGap="10px" class="navigation-items">
+          <li *ngIf="!(loggedInUser)"><a routerLink="/login">
+            <ng-container [ngSwitch]="userSetting.selected_language">
+              <ng-container *ngSwitchDefault>Login</ng-container>
+              <ng-container *ngSwitchCase="'magyar'">Bejelentkezés</ng-container>
+            </ng-container>
+          </a></li>
+          <li *ngIf="loggedInUser"><a routerLink="/login" (click)="logout()">
+            <ng-container [ngSwitch]="userSetting.selected_language">
+              <ng-container *ngSwitchDefault>Logout</ng-container>
+              <ng-container *ngSwitchCase="'magyar'">Kijelentkezés</ng-container>
+            </ng-container>
+          </a></li>
+          <li *ngIf="!(loggedInUser)"><a routerLink="/signup">
+            <ng-container [ngSwitch]="userSetting.selected_language">
+              <ng-container *ngSwitchDefault>Register</ng-container>
+              <ng-container *ngSwitchCase="'magyar'">Regisztráció</ng-container>
+            </ng-container>
+          </a></li>
+          <li *ngIf="loggedInUser"><a routerLink="/main">
+            <ng-container [ngSwitch]="userSetting.selected_language">
+              <ng-container *ngSwitchDefault>Main</ng-container>
+              <ng-container *ngSwitchCase="'magyar'">Főoldal</ng-container>
+            </ng-container>
+          </a></li>
+          <li *ngIf="loggedInUser"><a routerLink="/profile">
+            <ng-container [ngSwitch]="userSetting.selected_language">
+              <ng-container *ngSwitchDefault>Profile</ng-container>
+              <ng-container *ngSwitchCase="'magyar'">Fiók</ng-container>
+            </ng-container>
+          </a></li>
+          <li *ngIf="loggedInUser"><a routerLink="/address">
+            <ng-container [ngSwitch]="userSetting.selected_language">
+              <ng-container *ngSwitchDefault>Addresses</ng-container>
+              <ng-container *ngSwitchCase="'magyar'">Lakcímek</ng-container>
+            </ng-container>
+          </a></li>
+          <li *ngIf="loggedInUser"><a routerLink="/gas-clock">
+            <ng-container [ngSwitch]="userSetting.selected_language">
+              <ng-container *ngSwitchDefault>Dictating</ng-container>
+              <ng-container *ngSwitchCase="'magyar'">Gázbeolvasás</ng-container>
+            </ng-container>
+          </a></li>
+          <li *ngIf="loggedInUser"><a routerLink="/setting">
+            <ng-container [ngSwitch]="userSetting.selected_language">
+              <ng-container *ngSwitchDefault>Settings</ng-container>
+              <ng-container *ngSwitchCase="'magyar'">Beállítások</ng-container>
+            </ng-container>
+          </a></li>
+          <li><a routerLink="/contact">
+            <ng-container [ngSwitch]="userSetting.selected_language">
+              <ng-container *ngSwitchDefault>Contact</ng-container>
+              <ng-container *ngSwitchCase="'magyar'">Kapcsolatok</ng-container>
+            </ng-container>
+          </a></li>
+        </ul>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

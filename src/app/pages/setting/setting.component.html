@@ -1,0 +1,32 @@
+<div class="main_component div-flex">
+  <mat-card class="div-flex" *ngIf="userSetting">
+    <mat-card-header>
+      <mat-card-header>
+
+        <ng-container [ngSwitch]="userSetting.selected_language">
+          <ng-container *ngSwitchCase="'english'">Settings</ng-container>
+          <ng-container *ngSwitchCase="'magyar'">Beállítások</ng-container>
+        </ng-container>
+
+      </mat-card-header>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div>
+        <span class="icon_align"><mat-icon>language</mat-icon>
+          <ng-container [ngSwitch]="userSetting.selected_language">
+            <ng-container *ngSwitchCase="'english'">Language</ng-container>
+            <ng-container *ngSwitchCase="'magyar'">Nyelv</ng-container>
+          </ng-container>
+        </span>
+        <span class="others_align">
+          <mat-select (selectionChange)="reload($event, 'select')" [(value)] = "userSetting.selected_language">
+            <mat-option *ngFor="let selectedLanguageOption of languageOption" [value]="selectedLanguageOption"> {{selectedLanguageOption}} </mat-option>
+          </mat-select>
+        </span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="main_component2 div-flex"></div>

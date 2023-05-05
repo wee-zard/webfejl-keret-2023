@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "webfejl-2023-8260d": {
+      "hosting": {
+        "gazora-diktalas-projekt": [
+          "webfejl-2023-8260d"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "webfejl-2023-8260d"
+  }
+}

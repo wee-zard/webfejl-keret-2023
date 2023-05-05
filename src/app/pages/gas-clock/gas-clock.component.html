@@ -1,0 +1,58 @@
+<div class="div-card" *ngIf="globalAddressList">
+  <mat-card fxLayout fyLayoutGap="20px">
+    <span fxFlex="2 2 100%">
+      <mat-card-header>
+      </mat-card-header>
+      <span>
+        <mat-card-content>
+          <div>
+            <div>
+              <mat-icon>house</mat-icon>
+              <ng-container [ngSwitch]="userSetting.selected_language">
+                <ng-container *ngSwitchCase="'english'">Select an address</ng-container>
+                <ng-container *ngSwitchCase="'magyar'">Válassz ki egy lakcímet</ng-container>
+              </ng-container>
+            </div>
+            <mat-form-field appearance="fill">
+              <mat-select (selectionChange)="selectAddress($event)">
+                <mat-option *ngFor="let selectedAddress of globalAddressList;let i=index;" [value]="selectedAddress">
+                  {{selectedAddress.address.city}},
+                  {{selectedAddress.address.street}},
+                  {{selectedAddress.address.housenumber}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </span>
+      <span>
+        <mat-card-content *ngIf="globalSelectedAddress">
+          <div>
+            <mat-icon>gas_meter</mat-icon>
+            <ng-container [ngSwitch]="userSetting.selected_language">
+              <ng-container *ngSwitchCase="'english'">Enter your current gas-meter value</ng-container>
+              <ng-container *ngSwitchCase="'magyar'">Diktáld be a jelenlegi gázóra állásodat</ng-container>
+            </ng-container>
+          </div>
+          <form [formGroup]="dictatingNewGas">
+            <div>
+              <mat-form-field appearance="fill">
+                <mat-label>
+                  <ng-container [ngSwitch]="userSetting.selected_language">
+                    <ng-container *ngSwitchCase="'english'">Gas-meter:</ng-container>
+                    <ng-container *ngSwitchCase="'magyar'">Gázóra állás:</ng-container>
+                  </ng-container>
+                </mat-label>
+                <input type="number" matInput formControlName="gasMeter" min="{{latestGasDictationValue}}" required>
+              </mat-form-field>
+            </div>
+            <div>
+              <button mat-button (click)="onSubmit()">Submit</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </span>
+    </span>
+  </mat-card>
+</div>
+<div class="main_component"></div>

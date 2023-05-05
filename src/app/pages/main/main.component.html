@@ -1,0 +1,8 @@
+<div class="main_component">
+  <h1>
+    <ng-container [ngSwitch]="userSetting.selected_language">
+      <ng-container *ngSwitchCase="'english'">Welcome to the homepage!</ng-container>
+      <ng-container *ngSwitchCase="'magyar'">Üdvözöllek a főoldalon!</ng-container>
+    </ng-container>
+  </h1>
+</div>

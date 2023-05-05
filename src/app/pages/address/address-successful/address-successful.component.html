@@ -1,0 +1,38 @@
+<div class="main_component div-flex" *ngIf="modificationArray">
+  <mat-card class="div-flex">
+    <mat-card-header>
+      <h1>
+        <ng-container [ngSwitch]="modificationArray[0]">
+          <ng-container *ngSwitchCase="'create'">
+            <mat-icon>edit</mat-icon>
+            <ng-container [ngSwitch]="userSetting.selected_language">
+              <ng-container *ngSwitchCase="'english'">You added a new address!</ng-container>
+              <ng-container *ngSwitchCase="'magyar'">Új cím hozzáadásra került!</ng-container>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngSwitchCase="'update'">
+            <mat-icon>upgrade</mat-icon>
+            <ng-container [ngSwitch]="userSetting.selected_language">
+              <ng-container *ngSwitchCase="'english'">You updated the address!</ng-container>
+              <ng-container *ngSwitchCase="'magyar'">Lakcím módosításra került!</ng-container>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngSwitchCase="'delete'">
+            <mat-icon>delete</mat-icon>
+            <ng-container [ngSwitch]="userSetting.selected_language">
+              <ng-container *ngSwitchCase="'english'">You deleted the address</ng-container>
+              <ng-container *ngSwitchCase="'magyar'">Lakcím törlésre került</ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </h1>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <span><mat-icon>house</mat-icon>
+          <ng-container>{{modificationArray[1]}}, {{modificationArray[2]}}, {{modificationArray[3]}}</ng-container>
+        </span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

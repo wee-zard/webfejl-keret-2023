@@ -1,0 +1,83 @@
+<div class="div-card" *ngIf="addressInput">
+  <mat-card fxLayout fyLayoutGap="20px" *ngIf="userSetting">
+    <span fxFlex="2 2 100%">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>house</mat-icon>
+          <ng-container [ngSwitch]="userSetting.selected_language">
+            <ng-container *ngSwitchCase="'english'">Modify an addresses:</ng-container>
+            <ng-container *ngSwitchCase="'magyar'">Változtass meg egy lakcímet:</ng-container>
+          </ng-container>
+        </mat-card-title>
+      </mat-card-header>
+      <span>
+        <mat-card-content>
+          <div>
+            <mat-form-field appearance="fill">
+              <mat-select (selectionChange)="selectAddress($event)">
+                <mat-option *ngFor="let selectedAddress of addressInput;let i=index;" [value]="selectedAddress">
+                  {{selectedAddress.address.address.city}},
+                  {{selectedAddress.address.address.street}},
+                  {{selectedAddress.address.address.housenumber}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button *ngIf="globalSelectedAddress" (click)="OnDelete()" mat-button>
+              <ng-container [ngSwitch]="userSetting.selected_language">
+                <ng-container *ngSwitchCase="'english'">Delete Address</ng-container>
+                <ng-container *ngSwitchCase="'magyar'">Lakcím törlése</ng-container>
+              </ng-container>
+            </button>
+          </div>
+        </mat-card-content>
+      </span>
+      <span>
+        <mat-card-content *ngIf="globalSelectedAddress">
+          <form [formGroup]="modifyingAddress">
+            <div>
+              <mat-form-field>
+                <mat-label>
+                  <ng-container [ngSwitch]="userSetting.selected_language">
+                    <ng-container *ngSwitchCase="'english'">City</ng-container>
+                    <ng-container *ngSwitchCase="'magyar'">Város</ng-container>
+                  </ng-container>
+                </mat-label>
+                <input matInput formControlName="city"/>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-label>
+                  <ng-container [ngSwitch]="userSetting.selected_language">
+                    <ng-container *ngSwitchCase="'english'">Street</ng-container>
+                    <ng-container *ngSwitchCase="'magyar'">Utca</ng-container>
+                  </ng-container>
+                </mat-label>
+                <input matInput formControlName="street"/>
+              </mat-form-field>
+            </div>
+            <div>
+            <mat-form-field>
+              <mat-label>
+                <ng-container [ngSwitch]="userSetting.selected_language">
+                  <ng-container *ngSwitchCase="'english'">Housenumber</ng-container>
+                  <ng-container *ngSwitchCase="'magyar'">Házszám</ng-container>
+                </ng-container>
+              </mat-label>
+              <input matInput formControlName="housenumber"/>
+            </mat-form-field>
+            </div>
+            <div>
+              <button (click)="onModify()" mat-button>
+                <ng-container [ngSwitch]="userSetting.selected_language">
+                  <ng-container *ngSwitchCase="'english'">Modify</ng-container>
+                  <ng-container *ngSwitchCase="'magyar'">Módosít</ng-container>
+                </ng-container>
+              </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </span>
+    </span>
+  </mat-card>
+</div>

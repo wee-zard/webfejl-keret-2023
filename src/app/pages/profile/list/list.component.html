@@ -1,0 +1,107 @@
+<div class="main_component div-flex" *ngIf="userObject">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-header>
+        <ng-container [ngSwitch]="userSetting.selected_language">
+          <ng-container *ngSwitchCase="'english'">Personal Informations</ng-container>
+          <ng-container *ngSwitchCase="'magyar'">Személyes adatok</ng-container>
+        </ng-container>
+      </mat-card-header>
+    </mat-card-header>
+    <div class="div-flex">
+      <mat-card-content>
+        <p>
+          <mat-icon class="icon_align">badge</mat-icon><br/>
+          <label class="icon_align">
+            <ng-container [ngSwitch]="userSetting.selected_language">
+              <ng-container *ngSwitchCase="'english'">Full name:</ng-container>
+              <ng-container *ngSwitchCase="'magyar'">Teljes név:</ng-container>
+            </ng-container>
+            <span><br/>{{userObject.name.firstname}} {{userObject.name.lastname}}</span>
+          </label>
+        </p>
+      </mat-card-content>
+      <mat-card-content>
+        <p>
+          <mat-icon class="icon_align">person</mat-icon><br/>
+          <label class="icon_align">
+            <ng-container [ngSwitch]="userSetting.selected_language">
+              <ng-container *ngSwitchCase="'english'">Username:</ng-container>
+              <ng-container *ngSwitchCase="'magyar'">Felhasználónév:</ng-container>
+            </ng-container>
+            <span><br/>{{userObject.username}}</span>
+          </label>
+        </p>
+      </mat-card-content>
+      <mat-card-content>
+        <p>
+          <mat-icon class="icon_align">email</mat-icon><br/>
+          <label class="icon_align">
+            <ng-container [ngSwitch]="userSetting.selected_language">
+              <ng-container *ngSwitchCase="'english'">Email:</ng-container>
+              <ng-container *ngSwitchCase="'magyar'">Email:</ng-container>
+            </ng-container>
+            <span><br/>{{userObject.email}}</span>
+          </label>
+        </p>
+      </mat-card-content>
+      <mat-card-content>
+        <p>
+          <mat-icon class="icon_align">celebration</mat-icon><br/>
+          <label class="icon_align">
+            <ng-container [ngSwitch]="userSetting.selected_language">
+              <ng-container *ngSwitchCase="'english'">Birthdate:</ng-container>
+              <ng-container *ngSwitchCase="'magyar'">Születésnap:</ng-container>
+            </ng-container>
+            <span><br/>{{userObject.birthdate | szulDateFormat }}</span>
+          </label>
+        </p>
+      </mat-card-content>
+    </div>
+  </mat-card>
+</div>
+<div class="main_component div-flex" *ngIf="userObject">
+  <mat-card >
+    <mat-card-header>
+      <mat-card-header>
+        <ng-container [ngSwitch]="userSetting.selected_language">
+          <ng-container *ngSwitchCase="'english'">Addresses</ng-container>
+          <ng-container *ngSwitchCase="'magyar'">Lakáscímek</ng-container>
+        </ng-container>
+      </mat-card-header>
+    </mat-card-header>
+    <div class="div-flex">
+      <mat-card-content>
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>
+              <ng-container [ngSwitch]="userSetting.selected_language">
+                <ng-container *ngSwitchCase="'english'">City</ng-container>
+                <ng-container *ngSwitchCase="'magyar'">Város</ng-container>
+              </ng-container>
+            </th>
+            <th>
+              <ng-container [ngSwitch]="userSetting.selected_language">
+                <ng-container *ngSwitchCase="'english'">Street</ng-container>
+                <ng-container *ngSwitchCase="'magyar'">Utca</ng-container>
+              </ng-container>
+            </th>
+            <th>
+              <ng-container [ngSwitch]="userSetting.selected_language">
+                <ng-container *ngSwitchCase="'english'">Housenumber</ng-container>
+                <ng-container *ngSwitchCase="'magyar'">Házszám</ng-container>
+              </ng-container>
+            </th>
+          </tr>
+          <tr *ngFor="let addressObject of addressObject; let i=index;" [ngClass]=" i % 2===0 ? 'table-header-even' : 'table-header-odd'">
+            <td>{{i+1}}</td>
+            <td>{{addressObject.address.city}}</td>
+            <td>{{addressObject.address.street}}</td>
+            <td>{{addressObject.address.housenumber}}</td>
+          </tr>
+        </table>
+      </mat-card-content>
+    </div>
+  </mat-card>
+</div>
